@@ -41,20 +41,31 @@ public class ManagerDAOImpl implements ManagerDAO {
 
 	@Override
 	public List<Manager> selectAll() {
-		// TODO Auto-generated method stub
-		return null;
+		Session ses = HibernateUtil.getSession();
+		List<Manager> managerList = ses.createQuery("from Manager", Manager.class).list();
+		return managerList;
 	}
 
 	@Override
 	public boolean update(Manager manager) {
-		// TODO Auto-generated method stub
-		return false;
+		Session ses = HibernateUtil.getSession();
+		Transaction tx = ses.beginTransaction();
+		ses.clear();
+		ses.update(tx);
+		tx.commit();
+		
+		return true;
 	}
 
 	@Override
 	public boolean delete(Manager manager) {
-		// TODO Auto-generated method stub
-		return false;
+		Session ses = HibernateUtil.getSession();
+		Transaction tx = ses.beginTransaction();
+		ses.clear();
+		ses.delete(manager);
+		tx.commit();
+		return true;
+		
 	}
 
 }
