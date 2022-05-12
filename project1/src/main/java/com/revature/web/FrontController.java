@@ -16,8 +16,10 @@ public class FrontController extends HttpServlet{
 
 		switch (URI) {
 		case "managers":
-			System.out.println("manager");
 			break;
+		case "manager":
+			break;
+			
 		default:
 			System.out.println("ERROR");
 			break;
