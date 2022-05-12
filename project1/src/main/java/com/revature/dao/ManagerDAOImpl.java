@@ -42,7 +42,7 @@ public class ManagerDAOImpl implements ManagerDAO {
 	@Override
 	public List<Manager> selectAll() {
 		Session ses = HibernateUtil.getSession();
-		List<Manager> managerList = ses.createQuery("from Manager", Manager.class).list();
+		List<Manager> managerList = ses.createQuery("SELECT * FROM system_managers", Manager.class).list();
 		return managerList;
 	}
 
