@@ -8,7 +8,8 @@
 
 <servlet-mapping>
 	<servlet-name>FrontController</servlet-name>
-	<url-pattern>/managers</url-pattern>
+	<url-pattern>/managerlogin</url-pattern>
+	<url-pattern>/managerhome</url-pattern>
 	<url-pattern>/test</url-pattern>
 	<url-pattern>/error</url-pattern>
 </servlet-mapping>

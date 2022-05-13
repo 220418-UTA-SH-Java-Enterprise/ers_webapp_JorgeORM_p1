@@ -13,4 +13,13 @@ public class RequestHelper {
 		req.getRequestDispatcher("error.html").forward(req, resp);
 
 	}
+	
+	public static void processManagerLogin(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		//CODE GOES HERE
+
+	}
+	
+	public static void processManagerHome(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		//CODE GOES HERE
+	}
 }
