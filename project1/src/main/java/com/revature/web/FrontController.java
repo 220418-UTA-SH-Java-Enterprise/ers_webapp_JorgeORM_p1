@@ -15,14 +15,51 @@ public class FrontController extends HttpServlet{
 		final String URI = req.getRequestURI().replace("/project1/", "");
 
 		switch (URI) {
-		case "managers":
+		case "managerhome":
+			RequestHelper.processManagerHome(req, resp);
 			break;
-		case "manager":
+		case "managerlogin":
+			RequestHelper.processManagerLogin(req, resp);
+			break;
+		case "managerlogout":
 			break;
 			
 		default:
-			System.out.println("ERROR");
+			RequestHelper.processError(req, resp);
 			break;
 		}
 	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		final String URI = req.getRequestURI().replace("/project1/", "");
+		
+		switch (URI) {
+		default: 
+			RequestHelper.processError(req, resp);
+			break;
+		}
+		
+	}
+	
+	@Override
+	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		final String URI = req.getRequestURI().replace("/project1/", "");
+		switch (URI) {
+			default:
+				RequestHelper.processError(req, resp);
+				break;
+		}
+	}
+	
+	@Override 
+	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		final String URI = req.getRequestURI().replace("/project1/", "");
+		switch (URI){
+			default:
+				RequestHelper.processError(req, resp);
+				break;
+		}
+	}
 }
+
