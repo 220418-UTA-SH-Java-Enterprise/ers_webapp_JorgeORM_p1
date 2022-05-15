@@ -15,15 +15,27 @@ public class FrontController extends HttpServlet{
 		final String URI = req.getRequestURI().replace("/project1/", "");
 
 		switch (URI) {
-		case "managerhome":
+		case "managerHome":
 			RequestHelper.processManagerHome(req, resp);
 			break;
-		case "managerlogin":
+		case "managerLogin":
 			RequestHelper.processManagerLogin(req, resp);
 			break;
-		case "managerlogout":
+
+		case "managerLogout":
+			RequestHelper.processManagerLogout(req, resp);
+			break;
+		
+		case "managerReimbursementSearch":
 			break;
 			
+		case "managerReimbursementPending":
+			RequestHelper.processManagerReimbursementPending(req, resp);
+			break;
+		
+		case "managerReimbursementResolved":
+			RequestHelper.processManagerReimbursementResolved(req, resp);
+			break;
 		default:
 			RequestHelper.processError(req, resp);
 			break;
@@ -46,9 +58,14 @@ public class FrontController extends HttpServlet{
 	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		final String URI = req.getRequestURI().replace("/project1/", "");
 		switch (URI) {
-			default:
-				RequestHelper.processError(req, resp);
-				break;
+		
+		case "managerReimbursementApprove":
+			break;
+		case "managerReimbursementDeny":
+			break;	
+		default:
+			RequestHelper.processError(req, resp);
+			break;
 		}
 	}
 	
@@ -56,9 +73,9 @@ public class FrontController extends HttpServlet{
 	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		final String URI = req.getRequestURI().replace("/project1/", "");
 		switch (URI){
-			default:
-				RequestHelper.processError(req, resp);
-				break;
+		default:
+			RequestHelper.processError(req, resp);
+			break;
 		}
 	}
 }
