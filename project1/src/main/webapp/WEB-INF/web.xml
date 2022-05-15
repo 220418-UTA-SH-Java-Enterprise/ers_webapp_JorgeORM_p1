@@ -8,8 +8,13 @@
 
 <servlet-mapping>
 	<servlet-name>FrontController</servlet-name>
-	<url-pattern>/managerlogin</url-pattern>
-	<url-pattern>/managerhome</url-pattern>
+	<url-pattern>/managerHome</url-pattern>
+	<url-pattern>/managerLogin</url-pattern>
+	<url-pattern>/managerLogout</url-pattern>
+	<url-pattern>/managerReimbursementPending</url-pattern>
+	<url-pattern>/managerReimbursementResolved</url-pattern>
+	<url-pattern>/managerReimbursementApprove</url-pattern>
+	<url-pattern>/managerReimbursementDeny</url-pattern>
 	<url-pattern>/test</url-pattern>
 	<url-pattern>/error</url-pattern>
 </servlet-mapping>

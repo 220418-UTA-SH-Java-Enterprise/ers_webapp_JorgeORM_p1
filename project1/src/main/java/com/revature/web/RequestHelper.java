@@ -22,21 +22,43 @@ public class RequestHelper {
 	}
 	
 	public static void processManagerLogin(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-
+		PrintWriter out = resp.getWriter();
+		out.print("You've Logged In");
 	}
+	
+	public static void processManagerLogout(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		PrintWriter out = resp.getWriter();
+		out.print("You've Logged Out");
+		
+	}
+	
 	
 	public static void processManagerHome(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		PrintWriter out = resp.getWriter();
 		out.print("Manager home login test");
-		Reimbursement r = new Reimbursement();
-		r.setAmount(240);
-		r.setStatus("PENDING");
-		r.setStatusCode(0);
-		System.out.println("going to insert values into db");
-		int targetId = 1337;
-		targetId = reimbursementv.create(r);
-		System.out.println(targetId);
+	}
+	
+	public static void processManagerReimbursementPending(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+	
+	}
+	
+
+	public static void processManagerReimbursementResolved(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
 		
 	}
+	
+	
+	public static void processManagerReimbursementApprove(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		
+	}
+
+
+	public static void processManagerReimbursementDeny(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		
+	}
+	
 }
