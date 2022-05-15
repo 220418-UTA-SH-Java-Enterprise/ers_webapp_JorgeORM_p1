@@ -19,10 +19,12 @@ public class FrontController extends HttpServlet{
 			RequestHelper.processManagerHome(req, resp);
 			break;
 		case "managerlogin":
-			RequestHelper.processManagerLogin(req, resp);
+			
 			break;
+
 		case "managerlogout":
 			break;
+		
 			
 		default:
 			RequestHelper.processError(req, resp);
