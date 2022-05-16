@@ -7,8 +7,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.revature.models.*;
+
 public class FrontController extends HttpServlet{
 	private static final long serialVersionUID = 8339100247721381693L;
+	Manager currentManager = new Manager();
+	boolean managerLoggedIn = false;
+	boolean employeeLoggedIn = false;
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -18,13 +23,7 @@ public class FrontController extends HttpServlet{
 		case "managerHome":
 			RequestHelper.processManagerHome(req, resp);
 			break;
-		case "managerLogin":
-			RequestHelper.processManagerLogin(req, resp);
-			break;
 
-		case "managerLogout":
-			RequestHelper.processManagerLogout(req, resp);
-			break;
 		
 		case "managerReimbursementSearch":
 			break;
@@ -46,7 +45,7 @@ public class FrontController extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		final String URI = req.getRequestURI().replace("/project1/", "");
 		
-		switch (URI) {
+		switch (URI) {	
 		default: 
 			RequestHelper.processError(req, resp);
 			break;

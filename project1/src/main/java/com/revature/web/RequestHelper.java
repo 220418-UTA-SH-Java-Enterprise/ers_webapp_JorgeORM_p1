@@ -14,24 +14,13 @@ import javax.servlet.http.HttpServletResponse;
 public class RequestHelper {
 	
 	private static ReimbursementService reimbursementv = new ReimbursementServiceImpl(new ReimbursementDAOImpl());
+	private static ManagerService managerv = new ManagerServiceImpl(new ManagerDAOImpl());
 
 	public static void processError(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {	
 		PrintWriter out = resp.getWriter();
 		out.print("Oops something went wrong");
 
 	}
-	
-	public static void processManagerLogin(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		PrintWriter out = resp.getWriter();
-		out.print("You've Logged In");
-	}
-	
-	public static void processManagerLogout(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		PrintWriter out = resp.getWriter();
-		out.print("You've Logged Out");
-		
-	}
-	
 	
 	public static void processManagerHome(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		PrintWriter out = resp.getWriter();
@@ -60,5 +49,6 @@ public class RequestHelper {
 		
 		
 	}
+	
 	
 }
