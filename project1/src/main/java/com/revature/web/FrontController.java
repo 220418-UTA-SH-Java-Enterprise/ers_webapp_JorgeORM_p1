@@ -39,6 +39,11 @@ public class FrontController extends HttpServlet{
 			log.info("employee wants to see their reimbursements request");
 			RequestHelper.processReimbursementByEmployee(req, resp);
 			break;
+			
+		case "home":
+			log.info("employee wants to see the home screen and see their info");
+			RequestHelper.processHome(req, resp);
+			break;
 		
 		default:
 			RequestHelper.processError(req, resp);
