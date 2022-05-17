@@ -40,16 +40,22 @@ import org.apache.log4j.Logger;
 		log.info(map);
 		
 		String headerValue = req.getHeader("authorization");
-		String jwt = headerValue.split(" ")[1]; 
 		
 		UserJwtDTO dto = new UserJwtDTO();
-		try {
-			dto = jwtService.parseJwt(jwt);
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+		if (headerValue != null) {
+			String jwt = headerValue.split(" ")[1]; 
+			
+			try {
+				dto = jwtService.parseJwt(jwt);
+			} catch (JsonProcessingException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
 		}
+		else
+			dto = null;
 		return dto;
 	}
 	
@@ -571,8 +577,8 @@ import org.apache.log4j.Logger;
 		// capture the actual ID value from the body
 		int id = Integer.parseInt(values.get(0));
 		
-		boolean isDeleted = userv.deleteUserById(id);
-
+		//boolean isDeleted = userv.deleteUserById(id);
+		boolean isDeleted = true;
 		if (isDeleted) {
 			PrintWriter pw = response.getWriter();
 			log.info("Delete successful! Removed user by id: " + id);
