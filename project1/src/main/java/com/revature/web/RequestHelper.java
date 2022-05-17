@@ -49,7 +49,7 @@ public static void processAllEmployees(HttpServletRequest req, HttpServletRespon
 
   resp.setContentType("application/json");
 
-  List<Employee> allEmployees = employeev.findAllEmployees();
+  List<User> allEmployees = userv.findAllUsers();
 
   String json = om.writeValueAsString(allEmployees);
 
@@ -89,9 +89,9 @@ public static void processAllEmployeeBySearchParam(HttpServletRequest req, HttpS
     resp.setContentType("application/json");
 
     int id = Integer.parseInt(values.get(0));
-    Employee employee = employeev.findEmployeeByID(id);
+    User user = userv.findUserById(id);
 
-    String json = om.writeValueAsString(employee);
+    String json = om.writeValueAsString(user);
     PrintWriter out = resp.getWriter();
     out.println(json);
 
@@ -137,13 +137,14 @@ public static void processAllRegistration(HttpServletRequest request, HttpServle
       String password = values.get(1); // pass
       String firstname = values.get(2);
       String lastname = values.get(3);
-      Employee e = new Employee(username, password, firstname, lastname);
-      int targetId = employeev.register(e);
+      UserRole role = new UserRole(1, "employee");
+      User u = new User(username, password, firstname, lastname, role);
+      int targetId = userv.register(u);
       if (targetId != 0) {
           PrintWriter pw = response.getWriter();
-          e.setId(targetId);
-          log.info("New employee: " + e);
-          String json = om.writeValueAsString(e);
+          u.setId(targetId);
+          log.info("New employee: " + u);
+          String json = om.writeValueAsString(u);
           pw.println(json);
           System.out.println("JSON:\n" + json);
           response.setContentType("application/json");
@@ -190,37 +191,5 @@ public static void processAllRegistration(HttpServletRequest request, HttpServle
 
 
   }
-
-  public static void processRegistration(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-  BufferedReader reader = req.getReader();
-  StringBuilder s = new StringBuilder();
-  String body = s.toString(); 
-  String [] sepByAmp = body.split("&");
-
-  List<String> values = new ArrayList<String>();
-
-  for (String pair : sepByAmp) { 
-    values.add(pair.substring(pair.indexOf("=") + 1)); 
-  }
-
-  String username = values.get(0);
-  String password = values.get(1);
-  String firstName = values.get(2);
-  String lastName = values.get(3);
-
-  UserRole role = new UserRole(1, "employee");
-  User u = new User(username, password, firstName, lastName, role);
-  int targetId = userv.register(u);
-
-  PrintWriter out = resp.getWriter();
-  if(targetId != 0) {
-    resp.setStatus(200);
-    out.print("User Registered");
-  }
-  else {
-    resp.setStatus(204);
-    out.print("User Registered");
-  }
-}
 
 }

@@ -20,30 +20,16 @@ public class FrontController extends HttpServlet{
 		log.info("URI: " + URI);
 		
 		switch (URI) {
-		case "managerHome":
-			RequestHelper.processManagerHome(req, resp);
-			break;
-
-		
-		case "managerReimbursementSearch":
-			break;
-			
-		case "managerReimbursementPending":
-			//RequestHelper.processManagerReimbursementPending(req, resp);
-			break;
-		
-		case "managerReimbursementResolved":
-			//RequestHelper.processManagerReimbursementResolved(req, resp);
-			break;
 		case "employees":
 			log.info("employee wants a list of employees from API...");
 			RequestHelper.processAllEmployees(req, resp);
 		case "employee":
 			log.info("employee wants to search an employee from API based on first name or id number. URI " + URI);
-			RequestHelper.processAllEmployeeBySearchParam(req, resp);
-			
+			RequestHelper.processAllEmployeeBySearchParam(req, resp);	
 			break;
-
+			
+		case "reimbursements":
+		
 		default:
 			break;
 		}
