@@ -6,12 +6,20 @@
 	<servlet-class>com.revature.web.FrontController</servlet-class>
 </servlet>
 
+
 <servlet-mapping>
 	<servlet-name>FrontController</servlet-name>
-	<url-pattern>/managerlogin</url-pattern>
-	<url-pattern>/managerhome</url-pattern>
 	<url-pattern>/test</url-pattern>
 	<url-pattern>/error</url-pattern>
+	<url-pattern>/register</url-pattern>
+	<url-pattern>/login</url-pattern>
+	<url-pattern>/employee</url-pattern>
+	<url-pattern>/employees</url-pattern>
+	<url-pattern>/reimburse</url-pattern>
+	<url-pattern>/reimbursements</url-pattern>
+	<url-pattern>/pending</url-pattern>
+	<url-pattern>/approved</url-pattern>
+	
 </servlet-mapping>
 
 <error-page>

@@ -36,7 +36,7 @@ public class ReimbursementDAOImpl implements ReimbursementDAO{
 	public List<Reimbursement> selectByManager(String manager) {
 		log.info("searching for reimbursement by manager: " + manager);
 		Session ses = HibernateUtil.getSession();
-		List<Reimbursement> reimbursementList = ses.createQuery("SELECT * FROM system_reimbursement WHERE system_reimbursement_manager = " + manager + "", Reimbursement.class).list();
+		List<Reimbursement> reimbursementList = ses.createNativeQuery("SELECT * FROM system_reimbursements WHERE system_reimbursement_employee = '" + manager + "'", Reimbursement.class).list();
 		log.info("search complete");
 		return reimbursementList;
 	}
@@ -45,8 +45,8 @@ public class ReimbursementDAOImpl implements ReimbursementDAO{
 	public List<Reimbursement> selectByStatus(String status) {
 		log.info("searching for reimbursement by status: " + status);
 		Session ses = HibernateUtil.getSession();
-		List<Reimbursement> reimbursementList = ses.createQuery("SELECT * FROM system_reimbursement WHERE system_reimbursement_status = " + status + "", Reimbursement.class).list();
-		//log.info("search complete");
+		List<Reimbursement> reimbursementList = ses.createNativeQuery("SELECT * FROM system_reimbursements WHERE system_reimbursement_status = '" + status + "'", Reimbursement.class).list();
+		log.info("search complete");
 		return reimbursementList;
 	}
 
@@ -54,7 +54,7 @@ public class ReimbursementDAOImpl implements ReimbursementDAO{
 	public List<Reimbursement> selectAll() {
 		log.info("fetching all reimbursements");
 		Session ses = HibernateUtil.getSession();
-		List<Reimbursement> reimbursementList = ses.createQuery("SELECT * FROM system_reimbursement", Reimbursement.class).list();
+		List<Reimbursement> reimbursementList = ses.createQuery("FROM Reimbursement ORDER BY id", Reimbursement.class).list();
 		log.info("search complete");
 		return reimbursementList;
 	}
@@ -65,7 +65,7 @@ public class ReimbursementDAOImpl implements ReimbursementDAO{
 		Session ses = HibernateUtil.getSession();
 		Transaction tx = ses.beginTransaction();
 		ses.clear();
-		ses.update(tx);
+		ses.update(reimbursement);
 		tx.commit();
 		log.info("updating completet");
 		return true;

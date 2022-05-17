@@ -11,8 +11,15 @@
 	<url-pattern>/test</url-pattern>
 	<url-pattern>/error</url-pattern>
 	<url-pattern>/register</url-pattern>
+	<url-pattern>/login</url-pattern>
 	<url-pattern>/employee</url-pattern>
 	<url-pattern>/employees</url-pattern>
+	<url-pattern>/reimburse</url-pattern>
+	<url-pattern>/reimbursements</url-pattern>
+	<url-pattern>/reimbursement</url-pattern>
+	<url-pattern>/approve</url-pattern>
+	<url-pattern>/deny</url-pattern>
+	
 </servlet-mapping>
 
 <error-page>

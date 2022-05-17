@@ -18,7 +18,7 @@ public class Reimbursement {
 	@Column(name="system_reimbursement_id")
 	private int id;
 	@Column(name="system_reimbursement_amount")
-	private int amount;
+	private float amount;
 	@Column(name="system_reimbursement_status")
 	private String status;
 	@Column(name="system_reimbursement_statuscode")
@@ -27,21 +27,29 @@ public class Reimbursement {
 	private String manager;
 	@Column(name="system_reimbursement_managerid")
 	private int managerId;
+	@Column(name="system_reimbursement_employee")
+	private String employee;
+	@Column(name="system_reimbursement_employeeid")
+	private int employeeId;
 	
 	public Reimbursement() {
 		super();
 	}
 
-	public Reimbursement(int amount, String status, int statusCode, String manager, int managerId) {
+	public Reimbursement(float amount, String status, int statusCode, String manager, int managerId, String employee,
+			int employeeId) {
 		super();
 		this.amount = amount;
 		this.status = status;
 		this.statusCode = statusCode;
 		this.manager = manager;
 		this.managerId = managerId;
+		this.employee = employee;
+		this.employeeId = employeeId;
 	}
 
-	public Reimbursement(int id, int amount, String status, int statusCode, String manager, int managerId) {
+	public Reimbursement(int id, float amount, String status, int statusCode, String manager, int managerId,
+			String employee, int employeeId) {
 		super();
 		this.id = id;
 		this.amount = amount;
@@ -49,6 +57,8 @@ public class Reimbursement {
 		this.statusCode = statusCode;
 		this.manager = manager;
 		this.managerId = managerId;
+		this.employee = employee;
+		this.employeeId = employeeId;
 	}
 
 	public int getId() {
@@ -59,11 +69,11 @@ public class Reimbursement {
 		this.id = id;
 	}
 
-	public int getAmount() {
+	public float getAmount() {
 		return amount;
 	}
 
-	public void setAmount(int amount) {
+	public void setAmount(float amount) {
 		this.amount = amount;
 	}
 
@@ -98,6 +108,23 @@ public class Reimbursement {
 	public void setManagerId(int managerId) {
 		this.managerId = managerId;
 	}
+
+	public String getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(String employee) {
+		this.employee = employee;
+	}
+
+	public int getEmployeeId() {
+		return employeeId;
+	}
+
+	public void setEmployeeId(int employeeId) {
+		this.employeeId = employeeId;
+	}
+	
 
 	
 	

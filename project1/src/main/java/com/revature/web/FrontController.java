@@ -16,41 +16,57 @@ public class FrontController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		final String URI = req.getRequestURI().replace("/project1", "");
+		final String URI = req.getRequestURI().replace("/project1/", "");
 		log.info("URI: " + URI);
 		
 		switch (URI) {
+	
+		
 		case "employees":
 			log.info("employee wants a list of employees from API...");
 			RequestHelper.processAllEmployees(req, resp);
+			break;
 		case "employee":
 			log.info("employee wants to search an employee from API based on first name or id number. URI " + URI);
 			RequestHelper.processAllEmployeeBySearchParam(req, resp);	
 			break;
 			
 		case "reimbursements":
+			log.info("manager wants to see all reimbursement requests");
+			RequestHelper.processReimbursementsAll(req, resp);
+			
+		case "reimbursement":
+			log.info("employee wants to see their reimbursements request");
+			RequestHelper.processReimbursementByEmployee(req, resp);
+			break;
 		
 		default:
+			RequestHelper.processError(req, resp);
+
 			break;
 		}
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		final String URI = req.getRequestURI().replace("/project1", "");
+		final String URI = req.getRequestURI().replace("/project1/", "");
 		log.info("URI: " + URI);
 		
 		switch (URI) {
-		/*
-		case "register" : 
-			RequestHelper.processRegistration(req, resp);
+		case "login":
+			log.info("loggin in user");
+			RequestHelper.processLogin(req, resp);
 			break;
-			*/
 		case "register":
 			log.info("employee wants to register...");
 			RequestHelper.processAllRegistration(req, resp);
 			break;
+		case "reimburse":
+			log.info("employee wants to file a reimbursement...");
+			RequestHelper.processReimbursementCreate(req, resp);
+			break;
 		default:
+			RequestHelper.processError(req, resp);
 			break;
 		}
 	} 
@@ -59,12 +75,15 @@ public class FrontController extends HttpServlet{
 	@Override
 	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		final String URI = req.getRequestURI().replace("/project1/", "");
-		switch (URI) {
-		
-		case "managerReimbursementApprove":
+		switch (URI) {	
+		case "approve":
+			log.info("approving reimbursement");
+			RequestHelper.processApprove(req, resp);
 			break;
-		case "managerReimbursementDeny":
-			break;	
+		case "deny":
+			log.info("denying reimbursement");
+			RequestHelper.processDeny(req, resp);
+			break;
 		default:
 			RequestHelper.processError(req, resp);
 			break;
