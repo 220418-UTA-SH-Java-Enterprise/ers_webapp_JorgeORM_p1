@@ -222,5 +222,101 @@ public static void processAllRegistration(HttpServletRequest request, HttpServle
     out.print("User Registered");
   }
 }
+	public static void processEmployeeUpdate(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		log.info("inside of request helper...processUserUpdate...");
+		BufferedReader reader = request.getReader();
+		StringBuilder s = new StringBuilder();
+
+		// we are just transferring our Reader data to our StringBuilder, line by line
+		String line = reader.readLine();
+		while (line != null) {
+			s.append(line);
+			line = reader.readLine();
+		}
+
+		String body = s.toString(); 
+		String [] sepByAmp = body.split("&"); // separate username=bob&password=pass -> [username=bob, password=pass]
+		
+		List<String> values = new ArrayList<String>();
+		
+		for (String pair : sepByAmp) { // each element in array looks like this
+			values.add(pair.substring(pair.indexOf("=") + 1)); // trim each String element in the array to just value -> [bob, pass]
+		}
+		log.info("User attempted to update with information:\n " + body);
+		// capture the actual username and password values
+		int id = Integer.parseInt(values.get(0)); //id numbers cannot be modifed!
+		String username = values.get(1); // bob
+		String password = values.get(2); // pass
+		String firstname = values.get(3);
+		String lastname = values.get(4);
+		
+		User tempUser = new User();
+		tempUser.setId(id);
+		tempUser.setUsername(username);
+		tempUser.setPassword(password);
+		tempUser.setFirstName(firstname);
+		tempUser.setLastName(lastname);
+		boolean isUpdated = userv.editUser(tempUser);
+
+		if (isUpdated) {
+			PrintWriter pw = response.getWriter();
+			log.info("Edit successful! New user info: " + tempUser);
+			String json = om.writeValueAsString(tempUser);
+			pw.println(json);
+			System.out.println("JSON:\n" + json);
+			
+			response.setContentType("application/json");
+			response.setStatus(200); // SUCCESSFUL!
+			log.info("User has successfully been edited.");
+		} else {
+			response.setContentType("application/json");
+			response.setStatus(400); // this means that the connection was successful but no user was updated!
+		}
+		log.info("leaving request helper now...");
+	}
+	
+	public static void processEmployeeDelete(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		log.info("inside of request helper...processUserDelete...");
+		BufferedReader reader = request.getReader();
+		StringBuilder s = new StringBuilder();
+
+		// we are just transferring our Reader data to our StringBuilder, line by line
+		String line = reader.readLine();
+		while (line != null) {
+			s.append(line);
+			line = reader.readLine();
+		}
+
+		String body = s.toString(); 
+		String [] sepByAmp = body.split("&");
+		
+		List<String> values = new ArrayList<String>();
+		
+		for (String pair : sepByAmp) { // each element in array looks like this
+			values.add(pair.substring(pair.indexOf("=") + 1)); // trim each String element in the array to just value -> [bob, pass]
+		}
+		log.info("User attempted to update with information:\n " + body);
+		// capture the actual ID value from the body
+		int id = Integer.parseInt(values.get(0));
+		
+		boolean isDeleted = userv.deleteUserById(id);
+
+		if (isDeleted) {
+			PrintWriter pw = response.getWriter();
+			log.info("Delete successful! Removed user by id: " + id);
+			String json = om.writeValueAsString("User ID#" + id + " has been successfully removed!");
+			pw.println(json);
+			System.out.println("JSON:\n" + json);
+			
+			response.setContentType("application/json");
+			response.setStatus(200); // SUCCESSFUL!
+			log.info("User has successfully been edited.");
+		} else {
+			response.setContentType("application/json");
+			response.setStatus(400); // this means that the connection was successful but no user was deleted!
+		}
+		log.info("leaving request helper now...");
+		
+	}
 
 }
