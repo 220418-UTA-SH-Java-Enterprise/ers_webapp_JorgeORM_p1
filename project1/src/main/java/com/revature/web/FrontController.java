@@ -68,11 +68,11 @@ public class FrontController extends HttpServlet{
 			break;
 			
 		case "managerReimbursementPending":
-			RequestHelper.processManagerReimbursementPending(req, resp);
+			//RequestHelper.processManagerReimbursementPending(req, resp);
 			break;
 		
 		case "managerReimbursementResolved":
-			RequestHelper.processManagerReimbursementResolved(req, resp);
+			//RequestHelper.processManagerReimbursementResolved(req, resp);
 			break;
 		default:
 			RequestHelper.processError(req, resp);
@@ -85,7 +85,11 @@ public class FrontController extends HttpServlet{
 		final String URI = req.getRequestURI().replace("/project1/", "");
 		
 		switch (URI) {	
+		case "register" : 
+			RequestHelper.processRegistration(req, resp);
+			break;
 		default: 
+
 			RequestHelper.processError(req, resp);
 			break;
 		}
