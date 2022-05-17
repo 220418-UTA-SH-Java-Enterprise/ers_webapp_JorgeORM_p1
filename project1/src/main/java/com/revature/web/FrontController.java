@@ -20,6 +20,21 @@ public class FrontController extends HttpServlet{
 		log.info("URI: " + URI);
 		
 		switch (URI) {
+		case "managerHome":
+			RequestHelper.processManagerHome(req, resp);
+			break;
+
+		
+		case "managerReimbursementSearch":
+			break;
+			
+		case "managerReimbursementPending":
+			//RequestHelper.processManagerReimbursementPending(req, resp);
+			break;
+		
+		case "managerReimbursementResolved":
+			//RequestHelper.processManagerReimbursementResolved(req, resp);
+			break;
 		case "employees":
 			log.info("employee wants a list of employees from API...");
 			RequestHelper.processAllEmployees(req, resp);
@@ -40,6 +55,11 @@ public class FrontController extends HttpServlet{
 		log.info("URI: " + URI);
 		
 		switch (URI) {
+		/*
+		case "register" : 
+			RequestHelper.processRegistration(req, resp);
+			break;
+			*/
 		case "register":
 			log.info("employee wants to register...");
 			RequestHelper.processAllRegistration(req, resp);
@@ -49,52 +69,6 @@ public class FrontController extends HttpServlet{
 		}
 	} 
 	
-	private static final long serialVersionUID = 8339100247721381693L;
-	Manager currentManager = new Manager();
-	boolean managerLoggedIn = false;
-	boolean employeeLoggedIn = false;
-	
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		final String URI = req.getRequestURI().replace("/project1/", "");
-
-		switch (URI) {
-		case "managerHome":
-			RequestHelper.processManagerHome(req, resp);
-			break;
-
-		
-		case "managerReimbursementSearch":
-			break;
-			
-		case "managerReimbursementPending":
-			//RequestHelper.processManagerReimbursementPending(req, resp);
-			break;
-		
-		case "managerReimbursementResolved":
-			//RequestHelper.processManagerReimbursementResolved(req, resp);
-			break;
-		default:
-			RequestHelper.processError(req, resp);
-			break;
-		}
-	}
-	
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		final String URI = req.getRequestURI().replace("/project1/", "");
-		
-		switch (URI) {	
-		case "register" : 
-			RequestHelper.processRegistration(req, resp);
-			break;
-		default: 
-
-			RequestHelper.processError(req, resp);
-			break;
-		}
-		
-	}
 	
 	@Override
 	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

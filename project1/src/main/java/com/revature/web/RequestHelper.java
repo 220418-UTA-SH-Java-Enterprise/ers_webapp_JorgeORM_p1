@@ -8,17 +8,13 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.revature.dao.EmployeeDAOImpl;
-import com.revature.models.Employee;
-import com.revature.services.EmployeeService;
-import com.revature.services.EmployeeServiceImpl;
 
 public class RequestHelper {
 	
@@ -160,10 +156,6 @@ public static void processAllRegistration(HttpServletRequest request, HttpServle
       log.info("leaving request helper now...");
 }
 
-
-
-  private static ReimbursementService reimbursementv = new ReimbursementServiceImpl(new ReimbursementDAOImpl());
-  private static ManagerService managerv = new ManagerServiceImpl(new ManagerDAOImpl());
 
   public static void processError(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {	
     PrintWriter out = resp.getWriter();
