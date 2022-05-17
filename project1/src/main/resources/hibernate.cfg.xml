@@ -16,12 +16,10 @@
         <!-- When we start the application, there are automatically 10 connections ready to be used -->
         <property name="hibernate.connection.pool_size">10</property>
         <!-- Update database on startup -->
-        <property name="hibernate.hbm2ddl.auto">create</property>
+        <property name="hibernate.hbm2ddl.auto">validate</property>
         <!-- NONE, CREATE, UPDATE, VALIDATE (prod) -->
         <!-- Annotated entity classes -->
         <mapping class="com.revature.models.Reimbursement"/>
-        <mapping class="com.revature.models.Manager"/>
-        <mapping class="com.revature.models.Employee"/>
         <mapping class="com.revature.models.User"/>
         <mapping class="com.revature.models.UserRole"/>
         
