@@ -4,6 +4,7 @@ import com.revature.models.*;
 import com.revature.services.*;
 import com.revature.dao.*;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
@@ -46,28 +47,41 @@ public class RequestHelper {
 		out.print("Manager home login test");
 	}
 	
-	public static void processManagerReimbursementPending(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	public static void processRegistration(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		BufferedReader reader = req.getReader();
+		StringBuilder s = new StringBuilder();
+		String line = reader.readLine();
+		while(line != null) {
+			s.append(line);
+			line = reader.readLine();
+		}
+		String body = s.toString(); 
+		String [] sepByAmp = body.split("&");
 		
-	
+		List<String> values = new ArrayList<String>();
+		
+		for (String pair : sepByAmp) { 
+			values.add(pair.substring(pair.indexOf("=") + 1)); 
+		}
+		
+		String username = values.get(0);
+		String password = values.get(1);
+		String firstName = values.get(2);
+		String lastName = values.get(3);
+		
+		UserRole role = new UserRole(1, "employee");
+		User u = new User(username, password, firstName, lastName, role);
+		
+		int targetId = userv.register(u);
+		
+		PrintWriter out = resp.getWriter();
+		if(targetId != 0) {
+			resp.setStatus(200);
+			out.print("User Registered");
+		}
+		else {
+			resp.setStatus(204);
+			out.print("User Registered");
+		}
 	}
-	
-
-	public static void processManagerReimbursementResolved(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		
-	}
-	
-	
-	public static void processManagerReimbursementApprove(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		
-	}
-
-
-	public static void processManagerReimbursementDeny(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		
-	}
-	
-	
 }
