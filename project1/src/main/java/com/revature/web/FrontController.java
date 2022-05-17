@@ -84,34 +84,12 @@ public class FrontController extends HttpServlet{
 			log.info("denying reimbursement");
 			RequestHelper.processDeny(req, resp);
 			break;
-		default:
-			RequestHelper.processError(req, resp);
-			break;
-		}
-	}
-	
-	@Override 
-	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		final String URI = req.getRequestURI().replace("/project1/", "");
-		switch (URI){
-		default:
-			RequestHelper.processError(req, resp);
-			break;
-		}
-	}
-	
-		@Override
-	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		//save the URI and rewrite it to determine what functionality the user is requesting based on that endpoint
-		final String URI = req.getRequestURI().replace("/HelloFrontController/", "");
-		log.info("URI: " + URI);
-		
-		switch (URI) {
 		case "update": 
 			log.info("updating user...");
 			RequestHelper.processEmployeeUpdate(req, resp);
 			break;
 		default:
+			RequestHelper.processError(req, resp);
 			break;
 		}
 	}
@@ -130,5 +108,5 @@ public class FrontController extends HttpServlet{
 		default:
 			break;
 		}
-
+	}
 }
