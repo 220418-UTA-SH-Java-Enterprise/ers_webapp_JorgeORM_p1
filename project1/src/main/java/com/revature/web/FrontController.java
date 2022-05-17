@@ -94,5 +94,36 @@ public class FrontController extends HttpServlet{
 			break;
 		}
 	}
+	
+		@Override
+	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		//save the URI and rewrite it to determine what functionality the user is requesting based on that endpoint
+		final String URI = req.getRequestURI().replace("/HelloFrontController/", "");
+		log.info("URI: " + URI);
+		
+		switch (URI) {
+		case "update": 
+			log.info("updating user...");
+			RequestHelper.processEmployeeUpdate(req, resp);
+			break;
+		default:
+			break;
+		}
+	}
+	
+	@Override
+	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		//save the URI and rewrite it to determine what functionality the user is requesting based on that endpoint
+		final String URI = req.getRequestURI().replace("/HelloFrontController/", "");
+		log.info("URI: " + URI);
+		
+		switch (URI) {
+		case "delete": 
+			log.info("removing user...");
+			RequestHelper.processEmployeeDelete(req, resp);
+			break;
+		default:
+			break;
+		}
 
 }
