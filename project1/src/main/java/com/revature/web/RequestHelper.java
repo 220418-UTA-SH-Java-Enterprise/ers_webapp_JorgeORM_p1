@@ -624,7 +624,7 @@ import org.apache.log4j.Logger;
 			log.info("User is unauthorized to perform this operation.");
 			resp.setStatus(401);
 			PrintWriter out = resp.getWriter();
-		    out.print("You need to be logged in to view your reimbursements");
+		    out.print("You need to be logged in to view the home screen");
 		}
 	}
 }
